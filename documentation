@@ -3,23 +3,23 @@ Pipeline:
 [Audio Input] 
       │
       ▼
-┌───────────────┐
-│ 1. ML Layer   │ ──► Transcribes audio to text (e.g., Whisper)
-└───────────────┘
+┌────────────────┐
+│ 1. Conda Env   │ ──► Manages isolated local dependencies (Python, PyTorch)
+└────────────────┘
       │
       ▼
-┌───────────────┐
-│ 2. Graph/Cyber│ ──► LangGraph evaluates text for prompt injection / leaks
-└───────────────┘     │
-                      ├──► [IF COMPROMISED] ──► [Block Node] ──► Safe Error Output
-                      └──► [IF SAFE]        ──► [LLM Node]   ──► Final Summary Output
+┌────────────────┐
+│ 2. ML Layer    │ ──► Whisper transcribes audio to text locally
+└────────────────┘
       │
       ▼
-┌───────────────┐
-│ 3. API Layer  │ ──► FastAPI exposes the graph via a POST endpoint
-└───────────────┘
+┌────────────────┐
+│ 3. Graph/Cyber │ ──► LangGraph orchestrates nodes
+└────────────────┘     │
+                       ├──► [Cyber Node] ──► Queries Ollama (e.g., Llama 3) for threats
+                       ├──► [Safe Node]  ──► Queries Ollama for summary
       │
       ▼
-┌───────────────┐
-│ 4. DevOps     │ ──► Docker containerizes the application and system dependencies
-└───────────────┘
+┌────────────────┐
+│ 4. API & DevOps│ ──► FastAPI exposes endpoints; Docker containerizes the app
+└────────────────┘
