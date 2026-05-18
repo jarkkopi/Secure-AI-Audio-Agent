@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+langgraph
+langchain-core
+langchain-community
+openai-whisper
+torch
+pydantic
