@@ -16,8 +16,6 @@ conda-meta/
 *.mp3
 *.m4a
 *.flac
-# Exclude the test scripts you used for quick scratchpad testing
-test_audio.py
 
 # --- Operating System ---
 .DS_Store
