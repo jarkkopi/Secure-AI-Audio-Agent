@@ -1,0 +1,25 @@
+Pipeline:
+
+[Audio Input] 
+      │
+      ▼
+┌───────────────┐
+│ 1. ML Layer   │ ──► Transcribes audio to text (e.g., Whisper)
+└───────────────┘
+      │
+      ▼
+┌───────────────┐
+│ 2. Graph/Cyber│ ──► LangGraph evaluates text for prompt injection / leaks
+└───────────────┘     │
+                      ├──► [IF COMPROMISED] ──► [Block Node] ──► Safe Error Output
+                      └──► [IF SAFE]        ──► [LLM Node]   ──► Final Summary Output
+      │
+      ▼
+┌───────────────┐
+│ 3. API Layer  │ ──► FastAPI exposes the graph via a POST endpoint
+└───────────────┘
+      │
+      ▼
+┌───────────────┐
+│ 4. DevOps     │ ──► Docker containerizes the application and system dependencies
+└───────────────┘
