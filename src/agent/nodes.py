@@ -1,7 +1,12 @@
 from langchain_community.llms import Ollama
 from src.agent.state import AgentState
 
-phi3 = Ollama(model="phi3", temperature=0.7)
+# Update the model string to the quantized version you just pulled
+model = Ollama(
+    base_url="http://host.docker.internal:11434", 
+    model="qwen2.5:0.5b", 
+    temperature=0.7
+)
 
 def cybersecurity_node(state: AgentState) -> dict:
     """
@@ -21,7 +26,7 @@ def cybersecurity_node(state: AgentState) -> dict:
     )
 
     # local ollama inference for classification
-    response = phi3.invoke(system_prompt).strip().lower()
+    response = model.invoke(system_prompt).strip().lower()
     
     # only compromised or safe specifically
     status = "compromised" if "compromised" in response else "safe"
@@ -43,7 +48,7 @@ def summary_node(state: AgentState) -> dict:
         f"Transcript: {transcript}"
     )
 
-    response = phi3.invoke(prompt).strip()
+    response = model.invoke(prompt).strip()
     return {"output": response}
 
 def block_node(state: AgentState) -> dict:
