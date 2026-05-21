@@ -28,3 +28,7 @@ Thumbs.db
 # --- Environment & Configuration Variables ---
 .env
 .env.local
+
+# --- Docker Configuration ---
+.dockerignore
+docker-compose.override.yml
