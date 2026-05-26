@@ -10,7 +10,21 @@ A modular FastAPI and LangGraph pipeline that locally transcribes audio and uses
 - **Local LLM / SLM:** Ollama lightweight option qwen2.5:0.5b
 - **Transcription:** OpenAI Whisper (Local)
 - **Environment:** Conda
+- **UI:** streamlit
 
-Running:
-docker build -t secure-audio-agent .
- docker run -p 8000:8000 secure-audio-agent
+
+## Getting Started & Running Instructions
+
+This project can be executed entirely containerized using Docker Compose
+
+### Prerequisites
+* **Docker Desktop** installed and actively running.
+* **Ollama** installed on your host machine with the Qwen model pre-pulled:
+
+  ollama pull qwen2.5:0.5b
+- **Docker build:**
+  
+  docker compose build --no-cache
+  
+  docker compose up
+  
