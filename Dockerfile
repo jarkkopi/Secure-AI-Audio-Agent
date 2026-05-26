@@ -1,26 +1,26 @@
-# Use a lightweight, official Python image optimized for production
 FROM python:3.10-slim
 
-# Install system dependencies
-# ffmpeg is strictly required by Whisper to process audio files
+# Install system dependencies (ffmpeg is required by Whisper)
 RUN apt-get update && apt-get install -y \
     ffmpeg \
+    gcc \
+    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy only the requirements file first to leverage Docker's caching mechanism
+# Copy requirements file
 COPY requirements.txt .
 
-# Install Python dependencies
+# 💡 FIX: Install the Linux CPU-only version of PyTorch directly from the official wheels index
+RUN pip install --no-cache-dir torch==2.12.0 --index-url https://download.pytorch.org/whl/cpu
+
+# Install the remaining dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire src directory into the container
+# Copy the source code
 COPY src/ ./src/
 
-# Expose the port FastAPI runs on
 EXPOSE 8000
 
-# Run the Uvicorn server when the container starts
 CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
