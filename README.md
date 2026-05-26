@@ -1,5 +1,5 @@
 # Secure-AI-Audio-Agent
-Building a production-ready API ingesting audio, checking for security issues and returning structured LLM summary. Framework containerized with Docker.
+Building a production-ready API ingesting audio, checking for security issues and returning structured LLM summary. Framework containerized with Docker. UI implemented through streamlit.
 
 # Secure AI Audio Agent
 
@@ -27,4 +27,7 @@ This project can be executed entirely containerized using Docker Compose
   docker compose build --no-cache
   
   docker compose up
-  
+
+- **UI:**
+
+  UI can be then accessed through localhost:8501
