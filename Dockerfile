@@ -12,8 +12,8 @@ WORKDIR /app
 # Copy requirements file
 COPY requirements.txt .
 
-# 💡 FIX: Install the Linux CPU-only version of PyTorch directly from the official wheels index
-RUN pip install --no-cache-dir torch==2.12.0 --index-url https://download.pytorch.org/whl/cpu
+# Exact version of PyTorch with CPU support
+RUN pip install --no-cache-dir torch==2.12.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
 
 # Install the remaining dependencies
 RUN pip install --no-cache-dir -r requirements.txt

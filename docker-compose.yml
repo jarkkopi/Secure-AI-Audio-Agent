@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Service 1: The FastAPI Engine (Builds using the specialized Dockerfile recipe)
+  backend-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend-api
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # Service 2: The Streamlit GUI UI (Only pulls light UI requirements)
+  frontend-ui:
+    image: python:3.10-slim
+    container_name: frontend-ui
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8501:8501"
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+    # 💡 FIX: Pull only the lightweight UI requirements file instead of the heavy ML files
+    command: sh -c "pip install -r src/ui/requirements.txt && streamlit run src/ui/app.py"
+    depends_on:
+      - backend-api
