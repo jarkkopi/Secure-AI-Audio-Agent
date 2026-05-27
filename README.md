@@ -1,5 +1,5 @@
 # Secure-AI-Audio-Agent
-Building a production-ready API ingesting audio, checking for security issues and returning structured LLM summary. Framework containerized with Docker. UI implemented through streamlit.
+Building a local (adaptable to production) API ingesting audio, checking for security issues and returning structured LLM summary. Framework containerized with Docker. UI implemented through streamlit.
 
 A modular FastAPI and LangGraph pipeline that locally transcribes audio and uses a cybersecurity routing node to intercept prompt injection threats before summarizing the text.
 
