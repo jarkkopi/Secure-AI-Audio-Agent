@@ -1,31 +1,40 @@
-# Secure-AI-Audio-Agent
-Building a local (adaptable to production) API ingesting audio, checking for security issues and returning structured LLM summary. Framework containerized with Docker. UI implemented through streamlit.
+# Secure AI Audio Agent Framework
 
-A modular FastAPI and LangGraph pipeline that locally transcribes audio and uses a cybersecurity routing node to intercept prompt injection threats before summarizing the text.
+A local-first AI orchestration pipeline designed to ingest multi-format audio streams, execute local transcription, filter real-time security vulnerabilities, and generate structured analytical summaries. 
+
+By combining asynchronous backend routing with isolated microservices architecture, this framework ensures complete data privacy—processing sensitive auditory data strictly on-premise without reliance on external cloud APIs.
+
+## System Architecture Overview
+1. **Ingestion & UI:** A lightweight Streamlit interface captures audio uploads and streams payloads over a virtual bridge network.
+2. **Transcription Engine:** An asynchronous FastAPI backend uses a local OpenAI Whisper utility to decode and transcribe auditory data.
+3. **Security Orchestration:** A deterministic LangGraph state machine handles the transcript payload, routing it to a defensive security node.
+4. **Vulnerability Mitigation:** A localized Small Language Model (SLM) inspects the transcript to detect and neutralize prompt injection or system override risks before passing clean data to the final summarization layer.
 
 ## Tech Stack
-- **Orchestration:** LangGraph
-- **Local LLM / SLM:** Ollama lightweight option qwen2.5:0.5b
-- **Transcription:** OpenAI Whisper (Local)
-- **Environment:** Conda
-- **UI:** streamlit
+* **Orchestration:** LangGraph (Stateful, multi-agent routing workflows)
+* **API Framework:** FastAPI (Asynchronous REST API endpoints & automated Swagger documentation)
+* **Local Inference Engine:** Ollama running a hardware-optimized `qwen2.5:0.5b` model instance
+* **Automatic Speech Recognition (ASR):** OpenAI Whisper (Natively executed)
+* **Containerization & DevOps:** Docker & Docker Compose (Optimized multi-container microservices decoupling)
+* **Web UI:** Streamlit (Responsive file-upload and status dashboard)
 
+---
 
 ## Getting Started & Running Instructions
 
-This project can be executed entirely containerized using Docker Compose
+The entire environment is configured for a unified, single-command containerized deployment using Docker Compose. This ensures zero-configuration pathing and absolute environment isolation.
 
 ### Prerequisites
-* **Docker Desktop** installed and actively running.
-* **Ollama** installed on your host machine with the Qwen model pre-pulled:
+1. **Docker Desktop** installed, configured with WSL 2, and actively running in the system background.
+2. **Ollama** installed natively on your host machine with the target SLM pre-cached:
+   ```bash
+   ollama pull qwen2.5:0.5b
 
-  ollama pull qwen2.5:0.5b
-- **Docker build:**
-  
-  docker compose build --no-cache
-  
-  docker compose up
+### Execution
+git clone
 
-- **UI:**
+cd Secure-AI-Audio-Agent
 
-  UI can be then accessed through localhost:8501
+docker compose build --no-cache
+
+docker compose up
